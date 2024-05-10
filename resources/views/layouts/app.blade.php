@@ -154,22 +154,23 @@
                         <ul class="nav nav-pills nav-sidebar flex-column" data-widget="treeview" role="menu" data-accordion="false">
 
                             <li class="nav-item">
-                                <a href="{{url('/home')}}" class="nav-link active">
+                                <a href="{{url('/home')}}" class="nav-link {{ (request()->is('home*')) ? 'active' : '' }}">
                                     <i class="nav-icon fas fa-home"></i>
                                     <p>
                                         Inicio
                                     </p>
                                 </a>
                             </li>
-
-                            {{-- <li class="nav-item">
-                                <a href="#" class="nav-link">
-                                    <i class="nav-icon fas fa-th"></i>
+                            <li class="nav-item">
+                                <a href="{{url('/negocios')}}" class="nav-link {{ (request()->is('negocios*')) ? 'active' : '' }}" >
+                                    <i class="nav-icon fas fa-building"></i>
                                     <p>
-                                        Categorías
+                                        Negocios
                                     </p>
                                 </a>
                             </li>
+
+                            {{--
                             <li class="nav-item">
                                 <a href="#" class="nav-link">
                                     <i class="nav-icon fas fa-hashtag"></i>
@@ -254,7 +255,7 @@
             </div>
 
             @endif
-            @yield('content')
+            {{-- @yield('content') --}}
         </div>
 
         <footer class="main-footer">
