@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Negocios;
+use App\Models\Productos;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\File;
 
@@ -103,7 +104,9 @@ public function estado($id){
 }
 public function show($id){
     $negocio = Negocios::find($id);
-    return view('negocios.show', compact('negocio'));
+
+    $productos = Productos::where('negocio_id', $id)->orderBy('id', 'DESC')->paginate(10);
+    return view('negocios.show', compact('negocio', 'productos'));
 }
 
 }

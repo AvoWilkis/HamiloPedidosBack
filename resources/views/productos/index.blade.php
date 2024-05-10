@@ -1,64 +1,42 @@
 @extends('layouts.app')
 
 @section('content')
-    <div class="content-header">
-        <div class="container-fluid">
-            <div class="row mb-2">
-                <div class="col-sm-6">
-                    <h1 class="m-0">Negocio</h1>
-                </div>
-                <div class="col-sm-6">
-                    <ol class="breadcrumb float-sm-right">
-                        <li class="breadcrumb-item"><a href="#">Inicio</a></li>
-                        <li class="breadcrumb-item active">Negocios</li>
-                    </ol>
-                </div>
+
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Productos</h1>
+            </div>
+            <div class="col-sm-6">
+                <ol class="breadcrumb float-sm-right">
+                    <li class="breadcrumb-item"><a href="#">Inicio</a></li>
+                    <li class="breadcrumb-item active">Productos</li>
+                </ol>
             </div>
         </div>
     </div>
+</div>
 
-    <div class="content">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-md-4">
-                    <div class="card">
-                        <div class="card-header">Registro de Negocio</div>
 
-                        <div class="card-body">
+<div class="content">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">Listado de productos</div>
 
-                            <div class="text-center">
-                                <img src="{{$negocio->getImagenUrl()}}" alt="" class="border" height="150px" width="150px">
-                            </div>
-                            <div class="m-2">
-                                <h3>{{$negocio->nombre}}</h3>
-                            </div>
-                            <div class="m-2">
-                                <h3>{{$negocio->descripcion}}</h3>
-                            </div>
-                            <div class="m-2">
-                                <b>Estado:</b>
-
-                                @if($negocio->estado == true)
-                                <span class="badge badge-success">Activo</span>
-                                @else
-                                <span class="badge badge-danger">Inactivo</span>
-                                @endif
-                            </div>
-                            <div class="m-2">
-                                <b>Fecha de creación:</b>
-                                {{$negocio->created_at}}
-                            </div>
-                            <div class="text-center mt-3">
-                                <a href="{{url('/negocios')}}" class="btn btn-primary">Volver al listado</a>
-                            </div>
+                <div class="card-body">
+                    @include('includes.alertas')
+                    <div class="row">
+                        <div class="col-md-6">
+                            {{-- empty --}}
+                        </div>
+                        <div class="col-md-6">
+                            <a href="{{url('/productos/registrar')}}" class="btn btn-primary">Nuevo</a>
                         </div>
                     </div>
-                </div>
-                <div class="col-8">
-                    <div class="card">
-                        <div class="card header">Listado de Productos</div>
-                        <div class="card-body">
-
+                    <div class="row">
+                        <div class="col-12">
                             <div class="table-responsive">
                                 <table class="table table-bordered">
                                     <thead class="table-dark text-center">
@@ -69,6 +47,7 @@
                                             <th>Costos</th>
                                             <th>Descripcion</th>
                                             <th>Estado</th>
+                                            <th>Negocio</th>
                                             <th>Acciones</th>
                                         </tr>
                                     </thead>
@@ -90,7 +69,9 @@
                                                 <span class="badge badge-danger">Inactivo</span>
                                                 @endif
                                             </td>
-
+                                            <td>
+                                                <a href="{{url('/negocios/ver/'. $item->negocio->id)}}" class="btn btn-link">{{$item->negocio->nombre}}</a>
+                                            </td>
 
                                             <td>
                                                 <a href="{{url('/productos/actualizar/'.$item->id)}}" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i></a>
@@ -107,12 +88,11 @@
                                 {{ $productos->links('pagination::bootstrap-4')}}
                             </div>
                         </div>
-
                     </div>
-
                 </div>
             </div>
         </div>
     </div>
+</div>
 
 @endsection
